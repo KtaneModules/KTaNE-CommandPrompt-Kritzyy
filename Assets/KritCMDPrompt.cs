@@ -7,6 +7,7 @@ public class KritCMDPrompt : MonoBehaviour
 {
     public KMSelectable buttonY;
     public KMSelectable buttonN;
+    public KMSelectable CloseBtn;
 
     public KMBombInfo BombInfo;
 
@@ -33,6 +34,7 @@ public class KritCMDPrompt : MonoBehaviour
     bool Active = false;
     bool Typing = false;
     bool ActiveTyping = false;
+    bool Exceptions;
 
     string ButtonName;
 
@@ -43,6 +45,7 @@ public class KritCMDPrompt : MonoBehaviour
         GetComponent<KMNeedyModule>().OnNeedyDeactivation += OnNeedyDeactivation;
         buttonY.OnInteract += CommandY;
         buttonN.OnInteract += CommandN;
+        CloseBtn.OnInteract += Closing;
         GetComponent<KMNeedyModule>().OnTimerExpired += OnTimerExpired;
     }
 
@@ -112,6 +115,7 @@ public class KritCMDPrompt : MonoBehaviour
             if (File == 3)
             {
                 Exception4();
+                Exceptions = true;
                 FileName.text = "R u n I n d c";
                 if (Extension == 1)
                 {
@@ -136,7 +140,7 @@ public class KritCMDPrompt : MonoBehaviour
             } //RunIndc
             if (File == 4)
             {
-                ButtonAns = 1;
+                ButtonAns = 2;
                 FileName.text = "ButtonMasher";
                 if (Extension == 1)
                 {
@@ -172,6 +176,7 @@ public class KritCMDPrompt : MonoBehaviour
             if (File == 1)
             {
                 Exception2();
+                Exceptions = true;
                 FileName.text = "A u t o E x e c";
                 if (Extension == 1)
                 {
@@ -247,6 +252,7 @@ public class KritCMDPrompt : MonoBehaviour
             if (File == 4)
             {
                 Exception3();
+                Exceptions = true;
                 FileName.text = "ButtonMasher";
                 if (Extension == 1)
                 {
@@ -282,6 +288,7 @@ public class KritCMDPrompt : MonoBehaviour
             if (File == 1)
             {
                 Exception1();
+                Exceptions = true;
                 FileName.text = "A u t o E x e c";
                 if (Extension == 1)
                 {
@@ -332,6 +339,7 @@ public class KritCMDPrompt : MonoBehaviour
             if (File == 3)
             {
                 Exception4();
+                Exceptions = true;
                 FileName.text = "R u n I n d c";
                 if (Extension == 1)
                 {
@@ -392,6 +400,7 @@ public class KritCMDPrompt : MonoBehaviour
             if (File == 1)
             {
                 Exception3();
+                Exceptions = true;
                 FileName.text = "A u t o E x e c";
                 if (Extension == 1)
                 {
@@ -467,6 +476,7 @@ public class KritCMDPrompt : MonoBehaviour
             if (File == 4)
             {
                 Exception2();
+                Exceptions = true;
                 FileName.text = "ButtonMasher";
                 if (Extension == 1)
                 {
@@ -527,6 +537,7 @@ public class KritCMDPrompt : MonoBehaviour
             if (File == 2)
             {
                 Exception4();
+                Exceptions = true;
                 FileName.text = "M a n u a l D e t";
                 if (Extension == 1)
                 {
@@ -612,6 +623,7 @@ public class KritCMDPrompt : MonoBehaviour
             if (File == 1)
             {
                 Exception2();
+                Exceptions = true;
                 FileName.text = "A u t o E x e c";
                 if (Extension == 1)
                 {
@@ -662,6 +674,7 @@ public class KritCMDPrompt : MonoBehaviour
             if (File == 3)
             {
                 Exception3();
+                Exceptions = true;
                 FileName.text = "R u n I n d c";
                 if (Extension == 1)
                 {
@@ -716,6 +729,7 @@ public class KritCMDPrompt : MonoBehaviour
                 ExtensionName.text = "?";
             } //FileNotFound
         } //Stop
+        ButtonNaming();
     }
 
     void Exception1()
@@ -728,6 +742,7 @@ public class KritCMDPrompt : MonoBehaviour
         {
             ButtonAns = 2;
         }
+        ButtonNaming();
     }
     void Exception2()
     {
@@ -739,6 +754,7 @@ public class KritCMDPrompt : MonoBehaviour
         {
             ButtonAns = 2;
         }
+        ButtonNaming();
     }
     void Exception3()
     {
@@ -750,6 +766,7 @@ public class KritCMDPrompt : MonoBehaviour
         {
             ButtonAns = 1;
         }
+        ButtonNaming();
     }
     void Exception4()
     {
@@ -761,6 +778,7 @@ public class KritCMDPrompt : MonoBehaviour
         {
             ButtonAns = 1;
         }
+        ButtonNaming();
     }
 
     void ButtonNaming()
@@ -773,6 +791,7 @@ public class KritCMDPrompt : MonoBehaviour
         {
             ButtonName = "NO";
         }
+        LogAnswer();
     }
 
     void LogAnswer()
@@ -970,6 +989,14 @@ public class KritCMDPrompt : MonoBehaviour
     {
         GetComponent<KMNeedyModule>().OnStrike();
         Active = false;
+    }
+
+    protected bool Closing()
+    {
+        GetComponent<KMSelectable>().AddInteractionPunch();
+        GetComponent<KMNeedyModule>().HandleStrike();
+        Debug.LogFormat("[Command Prompt #{0}] Attempted to close BombCMD.cmd! Strike handed", moduleId);
+        return false;
     }
 }
 
