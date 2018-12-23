@@ -2,7 +2,7 @@
 	"Author": "Kritzy",
 	"Compatibility": "Compatible",
 	"DefuserDifficulty": "Easy",
-	"Description": "Respond to the command given on screen with YES or NO",
+	"Description": "Respond to the command given on screen with YES or NO, Tags: Yes, No, Button, Command",
 	"ExpertDifficulty": "Normal",
 	"ModuleID": "KritCMDPrompt",
 	"Name": "Command Prompt",
