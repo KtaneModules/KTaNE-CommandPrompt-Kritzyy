@@ -21,6 +21,25 @@ public class KritCMDPrompt : MonoBehaviour
 
     public KMAudio TypingSFX;
 
+    public KMSelectable[] ProcessTwitchCommand(string Command)
+    {
+        Command = Command.ToLowerInvariant().Trim();
+        if (Command.Equals("respond y"))
+        {
+            return new[] { buttonY };
+        }
+        else if (Command.Equals("respond n"))
+        {
+            return new[] { buttonN };
+        }
+        else
+        {
+            
+        }
+        return null;
+    }
+    private readonly string TwitchHelpMessage = "Type '!{0} respond Y/N' to press the given button";
+
     public float letterPause = 0.2f;
 
     static int moduleIdCounter = 1;
@@ -976,8 +995,8 @@ public class KritCMDPrompt : MonoBehaviour
 
     protected void OnNeedyActivation()
     {
-        Init();
         Active = true;
+        Init();
     }
 
     protected void OnNeedyDeactivation()
