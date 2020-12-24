@@ -2,6 +2,7 @@
 using System.Collections;
 using KModkit;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 public class KritCMDPrompt : MonoBehaviour
 {
@@ -24,11 +25,11 @@ public class KritCMDPrompt : MonoBehaviour
     public KMSelectable[] ProcessTwitchCommand(string Command)
     {
         Command = Command.ToLowerInvariant().Trim();
-        if (Command.Equals("respond y"))
+        if (Regex.IsMatch(Command, "respond y"))
         {
             return new[] { buttonY };
         }
-        else if (Command.Equals("respond n"))
+        else if (Regex.IsMatch(Command, "respond n"))
         {
             return new[] { buttonN };
         }
